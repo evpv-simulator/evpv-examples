@@ -18,18 +18,18 @@ fleet_config = {
     "total_vehicles": 1000,
     "vehicle_types": [
         {
-            "name": "car",
-            "battery_capacity_kWh": 50,
-            "consumption_kWh_per_km": 0.18,
+            "name": "BEV",
+            "battery_capacity_kWh": 60,
+            "consumption_kWh_per_km": 0.183,
             "max_charging_power_kW": 100,
-            "share": 0.9
+            "share": 0.8
         },
         {
-            "name": "motorcycle",
-            "battery_capacity_kWh": 10,
-            "consumption_kWh_per_km": 0.05,
-            "max_charging_power_kW": 7,
-            "share": 0.1
+            "name": "PHEV",
+            "battery_capacity_kWh": 15,
+            "consumption_kWh_per_km": 0.183,
+            "max_charging_power_kW": 11,
+            "share": 0.2
         }
     ]
 }
@@ -53,17 +53,17 @@ road_to_euclidian_ratio = 1.63  # Fallback ratio between distance by road and eu
 scenario = {
     "home": {
         "share": 0.5,
-        "power_options_kW": [[3.7, 0.9], [7.4, 0.1]],
+        "power_options_kW": [[3.2, 0.4], [7.4, 0.4], [11, 0.2]],
         "arrival_time_h": [18, 2]
     },
     "work": {
         "share": 0.3,
-        "power_options_kW": [[7.4, 0.9], [11, 0.1]],
+        "power_options_kW": [[7.4, 0.5], [11, 0.5]],
         "arrival_time_h": [9, 1]
     },
     "poi": {
         "share": 0.2,
-        "power_options_kW": [[3.7, 0.1], [7.4, 0.3], [11, 0.6]]
+        "power_options_kW": [[7.4, 0.15], [11, 0.15], [22, 0.55], [50, 0.15]]
         # Arrival time automatically calculated for POIs
     }
 }

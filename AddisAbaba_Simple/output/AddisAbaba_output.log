@@ -1,0 +1,100 @@
+
+------------------------------------------------
+Starting the run of the AddisAbaba case study
+Results are stored in the following folder: output
+------------------------------------------------
+
+=========================================
+INFO 	 Creation of a VehicleFleet object.
+=========================================
+INFO 	 Successful initialization of input parameters.
+=========================================
+INFO 	 Creation of a Region object.
+=========================================
+INFO 	 Successful initialization of input parameters.
+	 > Region area: 538.6685383502249 km²
+INFO 	 Defining traffic zones...
+INFO 	 Rectangular zoning...
+	 > Bounding box split into 6 x 6 zones
+	 > Width: 4.8879 km - Height: 4.8778 km: - Area: 23.8422 km²
+	 Removing zones outside region of interest (crop to region)...
+	 > Remaining zones: 24
+INFO 	 Aggregation of geodata into traffic zones...
+	 > Population: 5453847.5
+	 > Workplaces: 1245
+	 > POIs: 1198
+=========================================
+INFO 	 Creation of a MobilitySimulator object.
+=========================================
+INFO 	 Successful initialization of input parameters.
+INFO 	 Allocating vehicles to traffic zones...
+INFO 	 Method-based allocation of 1000 vehicles...
+ALERT 	 Adjusting difference of 2 vehicles due to rounding...
+	 > Total vehicles: 1000
+	 > Vehicles per zone: 41.666666666666664 ± 44.18013193700325
+	 > Distribution of zones per vehicle count:
+	    1 - 31  : ########################
+	   31 - 61  : ############
+	   61 - 91  : ######
+	   91 - 121 : ##
+	  121 - 151 : ##
+	  151 - 181 : ##
+INFO 	 Trip distribution...
+INFO 	 Calculating distance/time between traffic zones...
+INFO 	 Distance by road calculated using empirical road-to-euclidian ratio equal to 1.63
+INFO 	 Applying the 'gravity_exp_scaled' spatial interaction model...
+	 > Auto-scaled free parameter based on an average zone area of 23.84223789808455 km²: Beta = 0.1695113535159419
+	 > Total vehicle-km (by road): 11033.528328834374 km
+	 > Average distance travelled per vehicle (by road): 11.033528328834375 km
+=========================================
+INFO 	 Creation of a ChargingSimulator object.
+=========================================
+INFO 	 Successful initialization of input parameters.
+INFO 	 Computing the spatial charging demand...
+ALERT 	 Randomly allocating -1 vehicles due to rounding errors...
+ 	 > Average consumption: 0.183 kWh/km
+ 	 > Total charging needs: 4486.968187059312 kWh
+ 	 > Home: Total: 2243.484 kWh - Per vehicle (weighted avg): 4.500 kWh - Vehicles: 497
+ 	 > Work: Total: 1346.090 kWh - Per vehicle (weighted avg): 4.466 kWh - Vehicles: 301
+ 	 > POIs: Total: 897.394 kWh - Per vehicle (weighted avg): 4.487 kWh - Vehicles: 202
+INFO 	 Computing the temporal charging demand...
+INFO 	 Assigning properties to each vehicle...
+INFO 	 Selecting and filtering only vehicles charging today...
+	 > Number of vehicles charging: 428
+INFO 	 Computing the charging profile for each vehicle...
+ALERT 	 3  charging durations are smaller than the timestep. Charging demand may not be met.
+INFO 	 Computing the aggregated charging profile by location...
+	 > Total Charging Needs: 4709.06 kWh
+	 > Home Charging Needs: 2319.18 kWh
+	 > Work Charging Needs: 1488.00 kWh
+	 > POI Charging Needs: 901.88 kWh
+=========================================
+INFO 	 Creation of a PVSimulator object.
+=========================================
+INFO 	 Successful initialization of input parameters.
+INFO 	 Creating location object...
+	 > Lat.: 8.98046850261216 - Lon.: 38.78545971870749
+	 > Timezone: Africa/Addis_Ababa
+INFO 	 Fetching hourly weather data with POA irradiance from PV GIS for the year 2020 (Installation type: groundmounted_fixed)...
+	 > Elevation: 2328.0 m 
+	 > Mounting: {'fixed': {'slope': {'value': 16, 'optimal': True}, 'azimuth': {'value': -14, 'optimal': True}, 'type': 'free-standing'}}
+	 > Global POA irradiance: 2121.8349 kWh/m2/yr 
+	 > Diffuse POA irradiance: 804.39685 kWh/m2/yr 
+INFO 	 Creating a pvlib PVSystem object...
+INFO 	 Computing the hourly PV production...
+	 > Energy yield: 364.40011680554966 kWh/m2/yr
+	 > Specific yield: 1656.364167297953 kWh/kWp/yr
+	 > Performance ratio: 0.7806282040595868
+	 > Average capacity factor: 0.18856604818965766 
+=========================================
+INFO 	 Creation of a EVPVSynergies object.
+=========================================
+INFO 	 Successful initialization of input parameters.
+INFO 	 Computing all metrics over a given period. This might take some time...
+	 > Day: 01-01	 > Day: 01-02	 > Day: 01-03	 > Day: 01-04	 > Day: 01-05	 > Day: 01-06	 > Day: 01-07
+
+
+------------------------------------------------
+Simulation completed
+Elapsed time: : 0 minutes and 46.31 seconds
+------------------------------------------------
