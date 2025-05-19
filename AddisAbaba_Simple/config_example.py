@@ -39,7 +39,7 @@ region_geojson = "input/gadm41_ETH_1_AddisAbeba.json"  # Boundary polygon (geojs
 population_raster = "input/GHS_POP_merged_4326_3ss_V1_0_R8andR9_C22_cropped.tif" # Population raster (.tif in WGS84 coordinate system)
 workplaces_csv = "input/workplaces.csv"  # Workplace locations (CSV file)
 pois_csv = "input/pois.csv"  # Points of interest (CSV file)
-target_size_km = 5  # Target traffic zone size (in km)
+target_size_km = 3  # Target traffic zone size (in km)
 
 # --- Mobility Demand Simulation ---
 ors_key = None  # ORS API key (None if not using routing)
@@ -75,7 +75,7 @@ installation_type = "groundmounted_fixed"
 #          'groundmounted_singleaxis_vertical', 'groundmounted_dualaxis'
 
 # --- EV-PV Complementarity ---
-pv_capacity_MW = 10 # Installed nominal PV capacity
+pv_capacity_MW = 1 # Installed nominal PV capacity
 start_date = "01-01" # Start date of the simulation (Format: MM-DD)
 end_date = "01-07" # End date of the simulation (Format: MM-DD)
 
