@@ -25,11 +25,11 @@ from evpv.evpvsynergies import EVPVSynergies
 # STEP 1: Define the electric vehicle fleet
 # Create instances of Vehicle representing different types with specific attributes (e.g., battery capacity, consumption rate)
 
-car = Vehicle(name="car", battery_capacity_kWh=50, consumption_kWh_per_km=0.18)
-motorcycle = Vehicle(name="motorcycle", battery_capacity_kWh=10, consumption_kWh_per_km=0.05, max_charging_power_kW=10) # Define max charging power for motorcycles
+BEV = Vehicle(name="BEV", battery_capacity_kWh=60, consumption_kWh_per_km=0.18, max_charging_power_kW=100)
+PHEV = Vehicle(name="PHEV", battery_capacity_kWh=15, consumption_kWh_per_km=0.18, max_charging_power_kW=11)
 
 # Create a fleet of vehicles, specifying proportions for each vehicle type (e.g., 90% cars, 10% motorcycles)
-fleet = VehicleFleet(total_vehicles=1000, vehicle_types=[[car, 0.9], [motorcycle, 0.1]])
+fleet = VehicleFleet(total_vehicles=1000, vehicle_types=[[BEV, 0.8], [PHEV, 0.2]])
 
 # STEP 2: Define the region of interest and its traffic zone properties
 # Create a region using geospatial data (region boundaries, population raster, workplaces, points of interest)
@@ -40,7 +40,7 @@ region = Region(
     workplaces_csv="input/workplaces.csv",
     pois_csv="input/pois.csv",
     traffic_zone_properties={
-        "target_size_km": 5,
+        "target_size_km": 3,
         "shape": "rectangle",
         "crop_to_region": True
     }
@@ -88,17 +88,17 @@ charging_sim = ChargingSimulator(
     scenario={
         'home': {
             'share': 0.5,  # 50% of EVs charge at home
-            'power_options_kW': [[3.7, 0.9], [7.4, 0.1]],    
+            'power_options_kW': [[3.2, 0.4], [7.4, 0.4], [11, 0.2]],    
             'arrival_time_h': [18, 2]  # Arrival time with mean and std deviation
         },
         'work': {
             'share': 0.3,  # 30% of EVs charge at work
-            'power_options_kW': [[7.4, 0.9], [11, 0.1]],    
+            'power_options_kW': [[7.4, 0.5], [11, 0.5]],    
             'arrival_time_h': [9, 1]
         },
         'poi': {
             'share': 0.2,  # 20% of EVs charge at points of interest
-            'power_options_kW': [[3.7, 0.1], [7.4, 0.3], [11, 0.6]]    
+            'power_options_kW': [[7.4, 0.15], [11, 0.15], [22, 0.55], [50, 0.15]]    
         }
     }
 )
@@ -109,7 +109,7 @@ charging_sim.compute_temporal_demand(time_step=0.1) # Time step in hours
 # Other possible options (travel_time_home_work: float = 0.5, soc_threshold_mean: float = 0.6, soc_threshold_std_dev: float = 0.2)
 
 # Optional: Apply smart charging to reduce peak demand
-# charging_sim.apply_smart_charging(location=["home"], charging_strategy="peak_shaving", share=0.5)
+# charging_sim.apply_smart_charging(location=["home"], charging_strategy="peak_shaving", share=1.0)
 
 # Save charging demand data and visualizations
 charging_sim.to_csv("output/00_ChargingDemand.csv")
@@ -131,7 +131,7 @@ pv = PVSimulator(
         'temperature_coefficient': -0.004  
     }, 
     installation={
-        'type': 'rooftop',  # Options: 'rooftop' or 'groundmounted_fixed'
+        'type': 'groundmounted_fixed',  # Options: 'rooftop' or 'groundmounted_fixed'
         'system_losses': 0.14
     }
 )
@@ -142,7 +142,7 @@ pv.results.to_csv("output/00_PVProduction.csv")  # Save PV production data
 # STEP 6: EV-PV Synergy Analysis
 # Calculate synergies between PV generation and EV charging demand over a defined time period
 
-evpv = EVPVSynergies(pv=pv, ev=charging_sim, pv_capacity_MW=10)
+evpv = EVPVSynergies(pv=pv, ev=charging_sim, pv_capacity_MW=1)
 
 # Calculate daily synergy metrics for the first week of January, adjusting recompute_probability as needed
 synergy_metrics = evpv.daily_metrics("01-01", "01-07", recompute_probability=0.0)
