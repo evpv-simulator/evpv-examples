@@ -131,7 +131,7 @@ pv = PVSimulator(
         'temperature_coefficient': -0.004  
     }, 
     installation={
-        'type': 'groundmounted_fixed',  # Options: 'rooftop' or 'groundmounted_fixed'
+        'type': 'freestanding_opt_tilt',  # Options: 'freestanding_opt_tilt', 'flat_roof'
         'system_losses': 0.14
     }
 )
@@ -146,4 +146,5 @@ evpv = EVPVSynergies(pv=pv, ev=charging_sim, pv_capacity_MW=1)
 
 # Calculate daily synergy metrics for the first week of January, adjusting recompute_probability as needed
 synergy_metrics = evpv.daily_metrics("01-01", "01-07", recompute_probability=0.0)
+
 synergy_metrics.to_csv("output/00_EVPVSynergies.csv") # Save synergy metrics data
