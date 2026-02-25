@@ -70,9 +70,8 @@ scenario = {
 
 # --- PV Production ---
 year = 2020 # Year to simulate
-installation_type = "groundmounted_fixed"  
-# Options: 'rooftop', 'groundmounted_fixed', 'groundmounted_singleaxis_horizontal', 
-#          'groundmounted_singleaxis_vertical', 'groundmounted_dualaxis'
+installation_type = "freestanding_opt_til"  
+# Options: 'freestanding_opt_tilt', 'flat_roof'
 
 # --- EV-PV Complementarity ---
 pv_capacity_MW = 1 # Installed nominal PV capacity
@@ -103,4 +102,5 @@ temperature_coefficient = -0.004  # Efficiency drop per °C
 system_losses = 0.14  # Additional losse factor due to the PV system
 
 # --- EV-PV complementarity ---
+
 recompute_probability = 0.0  # Probability of recomputing daily charge needs from one day to another
